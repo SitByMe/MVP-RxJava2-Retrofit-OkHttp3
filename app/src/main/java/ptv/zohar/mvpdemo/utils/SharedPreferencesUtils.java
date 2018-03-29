@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -15,8 +14,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import ptv.zohar.mvpdemo.Constants;
 
 /**
  * Created by Zohar on 2018/1/22.
@@ -348,114 +345,5 @@ public class SharedPreferencesUtils {
         bais.close();
         ois.close();
         return obj;
-    }
-
-    /**
-     * 获取 userId
-     *
-     * @param context 上下文
-     * @return 用户id
-     */
-    public static String getUserId(Context context) {
-        if (TextUtils.isEmpty(Constants.SP_USER_ID))
-            return "0";
-        return getString(context, Constants.SP_USER_ID);
-    }
-
-    /**
-     * 保存 userId
-     *
-     * @param context 上下文
-     * @param userId  用户id
-     */
-    public static void putUserId(Context context, String userId) {
-        putString(context, Constants.SP_USER_ID, userId);
-    }
-
-    /**
-     * 保存 nickName
-     *
-     * @param context  上下文
-     * @param nickName 昵称
-     */
-    public static void putNickName(Context context, String nickName) {
-        putString(context, Constants.SP_NICK_NAME, nickName);
-    }
-
-    public static String getToken(Context context) {
-        String token = "";
-        try {
-            token = AESEncryptor.decrypt(Constants.AES_KEY, getString(context, Constants.SP_TOKEN));
-            Log.v("xika", "token:" + token);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return token;
-    }
-
-    public static void putToken(Context context, String token) {
-        try {
-            String aes_token = AESEncryptor.encrypt(Constants.AES_KEY, token);
-            Log.v("xika", "token:" + token);
-            Log.v("xika", "aes_token:" + aes_token);
-            putString(context, Constants.SP_TOKEN, aes_token);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 获取 nickName
-     *
-     * @param context 上下文
-     * @return
-     */
-    public static String getNickName(Context context) {
-        return getString(context, Constants.SP_NICK_NAME);
-    }
-
-    /**
-     * 移除 userId
-     *
-     * @param context 上下文
-     */
-    public static void removeUserId(Context context) {
-        remove(context, Constants.SP_USER_ID);
-    }
-
-    /**
-     * 保存地址信息
-     *
-     * @param context   上下文
-     * @param longitude 经度
-     * @param latitude  纬度
-     * @param district  区
-     * @param address   当前位置标志物
-     */
-    public static void putLocationInfo(Context context, String longitude, String latitude, String district, String address) {
-        SharedPreferencesUtils.putString(context, Constants.SP_LONGITUDE, longitude);
-        SharedPreferencesUtils.putString(context, Constants.SP_LATITUDE, latitude);
-        SharedPreferencesUtils.putString(context, Constants.SP_DISTRICT, district);
-        SharedPreferencesUtils.putString(context, Constants.SP_CURRENT_ADDRESS, address);
-    }
-
-    /**
-     * 获取纬度
-     *
-     * @param context 上下文
-     * @return 纬度
-     */
-    public static String getLatitude(Context context) {
-        return getString(context, Constants.SP_LATITUDE);
-    }
-
-    /**
-     * 获取经度
-     *
-     * @param context 上下文
-     * @return 经度
-     */
-    public static String getLongitude(Context context) {
-        return getString(context, Constants.SP_LONGITUDE);
     }
 }

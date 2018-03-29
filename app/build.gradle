@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    dataBinding {
+        enabled = true
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "ptv.zohar.mvpdemo"
@@ -11,8 +14,14 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            buildConfigField "Boolean", "IS_DEBUG", "true"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
+            buildConfigField "Boolean", "IS_DEBUG", "false"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -31,4 +40,13 @@ dependencies {
     compile 'com.google.dagger:dagger-android:2.11'
     compile 'com.google.dagger:dagger-android-support:2.11' // if you use the support libraries
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    compile 'com.github.yidun:captcha-android-demo:2.0'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.5'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
 }

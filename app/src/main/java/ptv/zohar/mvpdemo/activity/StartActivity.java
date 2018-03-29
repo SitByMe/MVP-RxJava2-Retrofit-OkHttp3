@@ -15,6 +15,6 @@ public class StartActivity extends BaseActivity {
     }
 
     public void enterApp(View view) {
-        StartActivityUtils.startActivity(this, LoginActivity.class);
+        StartActivityUtils.startActivity(this, MovieActivity.class);
     }
 }
