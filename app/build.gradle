@@ -25,6 +25,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Ensure the no-op dependency is always used in JVM tests.
+    configurations.all { config ->
+        if (config.name.contains('UnitTest')) {
+            config.resolutionStrategy.eachDependency { details ->
+                if (details.requested.group == 'com.squareup.leakcanary' && details.requested.name == 'leakcanary-android') {
+                    details.useTarget(group: details.requested.group, name: 'leakcanary-android-no-op', version: details.requested.version)
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -49,4 +60,6 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }

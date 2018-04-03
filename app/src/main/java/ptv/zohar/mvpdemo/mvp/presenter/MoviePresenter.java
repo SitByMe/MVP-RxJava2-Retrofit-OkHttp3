@@ -18,13 +18,14 @@ public class MoviePresenter extends BasePresenter<MovieView> {
     public MoviePresenter(MovieView view, Context context) {
         this.view = view;
         this.model = new MovieModel(context);
+        attachView(view);
     }
 
     public void getTopMovie(int start, int count) {
         this.model.getTopMovie(start, count, new ObserverOnNextListener<Movie>() {
             @Override
             public void onNext(Movie movie) {
-                view.onLoginResult(movie);
+                view.getTopMovieResult(movie);
             }
         });
     }

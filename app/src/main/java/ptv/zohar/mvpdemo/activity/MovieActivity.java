@@ -20,12 +20,10 @@ import ptv.zohar.mvpdemo.utils.ToastUtils;
  * Created by Zohar on 2018/1/22.
  * desc: 电影
  */
-public class MovieActivity extends BaseActivity implements MovieView {
+public class MovieActivity extends BaseActivity<MoviePresenter> implements MovieView {
     private final String TAG = "MovieActivity";
     @BindView(R.id.tv_result)
     AppCompatTextView tvResult;
-
-    private MoviePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +32,6 @@ public class MovieActivity extends BaseActivity implements MovieView {
         ButterKnife.bind(this);
 
         presenter = new MoviePresenter(this, this);
-        presenter.attachView(this);
     }
 
     /**
@@ -47,7 +44,7 @@ public class MovieActivity extends BaseActivity implements MovieView {
     }
 
     @Override
-    public void onLoginResult(Movie movie) {
+    public void getTopMovieResult(Movie movie) {
         LogUtils.i(TAG, "onNext: " + movie.getTitle());
         List<Subjects> list = movie.getSubjects();
         for (Subjects sub : list) {
@@ -55,11 +52,5 @@ public class MovieActivity extends BaseActivity implements MovieView {
         }
         tvResult.setText(movie.toString());
         ToastUtils.showLongToast(this, "获取完成");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        this.presenter.detachView();
     }
 }

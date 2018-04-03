@@ -7,5 +7,5 @@ import ptv.zohar.mvpdemo.entity.Movie;
  * desc:
  */
 public interface MovieView extends BaseView {
-    void onLoginResult(Movie movie);
+    void getTopMovieResult(Movie movie);
 }
