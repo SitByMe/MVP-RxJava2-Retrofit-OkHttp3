@@ -1,5 +1,7 @@
 package ptv.zohar.mvpdemo.http;
 
+import okhttp3.OkHttpClient;
+import ptv.zohar.mvpdemo.BuildConfig;
 import ptv.zohar.mvpdemo.http.iservices.IMovieService;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -15,6 +17,11 @@ public class HttpCore {
     private static IMovieService movieService;
 
     private static <T> T createRetrofitForGsonConverter(Class<T> clazz) {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        if (BuildConfig.DEBUG) {
+            builder.addInterceptor(new LoggingInterceptor());//使用自定义的Log拦截器
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())//请求的结果转为实体类
