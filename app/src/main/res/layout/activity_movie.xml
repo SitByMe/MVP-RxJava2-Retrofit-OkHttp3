@@ -9,7 +9,7 @@
     <android.support.v7.widget.AppCompatButton
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:onClick="getTopMovie"
+        android:onClick="requestTopMovie"
         android:text="@string/text_get_top_movie"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

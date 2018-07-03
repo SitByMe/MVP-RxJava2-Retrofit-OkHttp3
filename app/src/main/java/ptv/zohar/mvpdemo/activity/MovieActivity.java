@@ -31,20 +31,21 @@ public class MovieActivity extends BaseActivity<MoviePresenter> implements Movie
         setContentView(R.layout.activity_movie);
         ButterKnife.bind(this);
 
-        presenter = new MoviePresenter(this, this);
+        presenter = new MoviePresenter(this);
+        presenter.attachView(this);
     }
 
     /**
      * 获取热门电影
      *
-     * @param view
+     * @param view view
      */
-    public void getTopMovie(View view) {
-        presenter.getTopMovie(0, 10);
+    public void requestTopMovie(View view) {
+        presenter.requestTopMovie(0, 10);
     }
 
     @Override
-    public void getTopMovieResult(Movie movie) {
+    public void showTopMovie(Movie movie) {
         LogUtils.i(TAG, "onNext: " + movie.getTitle());
         List<Subjects> list = movie.getSubjects();
         for (Subjects sub : list) {

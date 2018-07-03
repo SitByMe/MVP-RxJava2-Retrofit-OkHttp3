@@ -5,5 +5,9 @@ package ptv.zohar.mvpdemo.http;
  * desc:
  */
 public interface ObserverOnNextListener<T> {
-    void onNext(T t);
+    void onCompleted();
+
+    void onError(Throwable e);
+
+    void onNext(T result);
 }

@@ -12,52 +12,37 @@ import ptv.zohar.mvpdemo.utils.LogUtils;
  */
 public class MyObserver<T> implements Observer<T>, ProgressCancelListener {
     private static final String TAG = "ProgressObserver";
-    private ObserverOnNextListener listener;
-    private ProgressDialogHandler mProgressDialogHandler;
-    private Context context;
+    private ObserverOnNextListener<T> listener;
     private Disposable d;
 
-    public MyObserver(Context context, ObserverOnNextListener listener) {
+    public MyObserver(ObserverOnNextListener<T> listener) {
         this.listener = listener;
-        this.context = context;
-        mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
     }
 
-
-    private void showProgressDialog() {
-        if (mProgressDialogHandler != null) {
-            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
-        }
-    }
-
-    private void dismissProgressDialog() {
-        if (mProgressDialogHandler != null) {
-            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
-            mProgressDialogHandler = null;
-        }
+    public MyObserver(Context context, ObserverOnNextListener<T> listener) {
+        this.listener = listener;
     }
 
     @Override
     public void onSubscribe(Disposable d) {
         this.d = d;
-        showProgressDialog();
     }
 
     @Override
     public void onNext(T t) {
-        listener.onNext(t);
+        if (listener != null) listener.onNext(t);
     }
 
     @Override
     public void onError(Throwable e) {
-        dismissProgressDialog();
         LogUtils.i(TAG, "onError: " + e.toString());
+        if (listener != null) listener.onError(e);
     }
 
     @Override
     public void onComplete() {
-        dismissProgressDialog();
         LogUtils.i(TAG, "onComplete: ");
+        if (listener != null) listener.onCompleted();
     }
 
     @Override

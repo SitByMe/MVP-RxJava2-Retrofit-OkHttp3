@@ -5,4 +5,7 @@ package ptv.zohar.mvpdemo.mvp.view;
  * desc:
  */
 public interface BaseView {
+    void showLoadingView();
+
+    void dismissLoadingView();
 }
