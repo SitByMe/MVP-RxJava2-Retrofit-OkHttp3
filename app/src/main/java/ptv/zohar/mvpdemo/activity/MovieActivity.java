@@ -21,7 +21,6 @@ import ptv.zohar.mvpdemo.utils.ToastUtils;
  * desc: 电影
  */
 public class MovieActivity extends BaseActivity<MoviePresenter> implements MovieView {
-    private final String TAG = "MovieActivity";
     @BindView(R.id.tv_result)
     AppCompatTextView tvResult;
 
@@ -30,6 +29,7 @@ public class MovieActivity extends BaseActivity<MoviePresenter> implements Movie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
         ButterKnife.bind(this);
+        TAG = "MovieActivity";
 
         presenter = new MoviePresenter(this);
         presenter.attachView(this);
@@ -47,11 +47,13 @@ public class MovieActivity extends BaseActivity<MoviePresenter> implements Movie
     @Override
     public void showTopMovie(Movie movie) {
         LogUtils.i(TAG, "onNext: " + movie.getTitle());
+        StringBuilder builder = new StringBuilder(movie.getTitle()).append("\n");
         List<Subjects> list = movie.getSubjects();
         for (Subjects sub : list) {
             LogUtils.i(TAG, "onNext: " + sub.getId() + "," + sub.getYear() + "," + sub.getTitle());
+            builder.append(sub.getId()).append(",").append(sub.getYear()).append(",").append(sub.getTitle()).append("\n");
         }
-        tvResult.setText(movie.toString());
+        tvResult.setText(builder.toString());
         ToastUtils.showLongToast(this, "获取完成");
     }
 }

@@ -13,6 +13,8 @@ import ptv.zohar.mvpdemo.mvp.presenter.BasePresenter;
  * desc: 基类Activity
  */
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity {
+    public String TAG = "UnInitActTag";
+
     public Context mContext = this;
 
     protected P presenter;

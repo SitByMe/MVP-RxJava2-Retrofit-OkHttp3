@@ -1,10 +1,7 @@
 package ptv.zohar.mvpdemo.http;
 
-import android.content.Context;
-
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import ptv.zohar.mvpdemo.utils.LogUtils;
 
 /**
  * Created by Zohar on 2018/3/29.
@@ -16,10 +13,6 @@ public class MyObserver<T> implements Observer<T>, ProgressCancelListener {
     private Disposable d;
 
     public MyObserver(ObserverOnNextListener<T> listener) {
-        this.listener = listener;
-    }
-
-    public MyObserver(Context context, ObserverOnNextListener<T> listener) {
         this.listener = listener;
     }
 
@@ -35,13 +28,12 @@ public class MyObserver<T> implements Observer<T>, ProgressCancelListener {
 
     @Override
     public void onError(Throwable e) {
-        LogUtils.i(TAG, "onError: " + e.toString());
+        e.printStackTrace();
         if (listener != null) listener.onError(e);
     }
 
     @Override
     public void onComplete() {
-        LogUtils.i(TAG, "onComplete: ");
         if (listener != null) listener.onCompleted();
     }
 

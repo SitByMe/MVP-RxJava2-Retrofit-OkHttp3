@@ -309,7 +309,7 @@ public class SharedPreferencesUtils {
             return;
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = null;
+        ObjectOutputStream oos;
         oos = new ObjectOutputStream(baos);
         oos.writeObject(obj);
         // 将对象放到OutputStream中

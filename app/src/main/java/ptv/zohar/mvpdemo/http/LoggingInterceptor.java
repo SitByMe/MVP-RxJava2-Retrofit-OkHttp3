@@ -28,8 +28,8 @@ public class LoggingInterceptor implements Interceptor {
             StringBuilder sb = new StringBuilder();
             if (request.body() instanceof FormBody) {
                 FormBody body = (FormBody) request.body();
-                for (int i = 0; i < body.size(); i++) {
-                    sb.append(body.encodedName(i) + "=" + body.encodedValue(i) + ",");
+                for (int i = 0; i < (body != null ? body.size() : 0); i++) {
+                    sb.append(body.encodedName(i)).append("=").append(body.encodedValue(i)).append(",");
                 }
                 sb.delete(sb.length() - 1, sb.length());
                 Log.i(TAG, String.format("发送请求 %s on %s %n%s %nRequestParams:{%s}",
@@ -48,14 +48,6 @@ public class LoggingInterceptor implements Interceptor {
         Log.i(TAG, String.format("%.1fms %n%s", (t2 - t1) / 1e6d, response.headers()));
         Log.i(TAG, String.format("接收响应: %s", response.request().url()));
         Log.i(TAG, String.format("返回json:【%s】", responseBody.string()));
-
-      /*  Log.i(TAG,
-                String.format("接收响应: [%s] %n返回json:【%s】 %.1fms %n%s",
-                        response.request().url(),
-                        responseBody.string(),
-                        (t2 - t1) / 1e6d,
-                        response.headers()
-                ));*/
         return response;
     }
 }

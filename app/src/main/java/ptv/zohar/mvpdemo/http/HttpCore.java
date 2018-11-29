@@ -2,7 +2,6 @@ package ptv.zohar.mvpdemo.http;
 
 import okhttp3.OkHttpClient;
 import ptv.zohar.mvpdemo.BuildConfig;
-import ptv.zohar.mvpdemo.http.iservices.IMovieService;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -12,33 +11,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * desc:
  */
 public class HttpCore {
-    private static String baseUrl = "https://api.douban.com/v2/movie/";
 
-    private static IMovieService movieService;
-
-    private static <T> T createRetrofitForGsonConverter(Class<T> clazz) {
+    private static <S> S createRetrofitForGsonConverter(Class<S> iServer) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(new LoggingInterceptor());//使用自定义的Log拦截器
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(BuildConfig.API_HOST)
                 .addConverterFactory(GsonConverterFactory.create())//请求的结果转为实体类
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        return retrofit.create(clazz);
+        return retrofit.create(iServer);
     }
 
-    //单例
-    public static IMovieService getMovieService() {
-        if (movieService == null) {
-            synchronized (HttpCore.class) {
-                if (movieService == null) {
-                    movieService = createRetrofitForGsonConverter(IMovieService.class);
-                }
-            }
-        }
-        return movieService;
+    public static <S> S getService(Class<S> iServer) {
+        return createRetrofitForGsonConverter(iServer);
     }
 }

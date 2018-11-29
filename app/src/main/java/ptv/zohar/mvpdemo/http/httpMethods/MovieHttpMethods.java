@@ -2,10 +2,10 @@ package ptv.zohar.mvpdemo.http.httpMethods;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import ptv.zohar.mvpdemo.entity.Movie;
 import ptv.zohar.mvpdemo.http.HttpCore;
+import ptv.zohar.mvpdemo.http.iservices.IMovieService;
 
 /**
  * Created by Zohar on 2018/3/29.
@@ -20,7 +20,7 @@ public class MovieHttpMethods extends BaseHttpMethods {
      * @param count    获取长度
      * @param observer Observer with Movie
      */
-    public static void getTopMovie(int start, int count, Consumer<Disposable> before, Action after, Observer<Movie> observer) {
-        httpSubscribe(HttpCore.getMovieService().getTopMovie(start, count), before, after, observer);
+    public static void getTopMovie(int start, int count, Consumer<Disposable> before, Observer<Movie> observer) {
+        httpSubscribe(HttpCore.getService(IMovieService.class).getTopMovie(start, count), before, observer);
     }
 }
