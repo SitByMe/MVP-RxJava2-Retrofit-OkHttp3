@@ -6,7 +6,7 @@ import android.os.Looper;
 import android.widget.Toast;
 
 /**
- * Created by Zohar on 2018/1/22.
+ * Created by lhZou on 2018/1/22.
  * desc: 吐司相关工具类
  */
 public class ToastUtils {

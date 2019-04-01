@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 /**
- * Created by Zohar on 2018/1/22.
+ * Created by lhZou on 2018/1/22.
  */
 public class StartActivityUtils {
 
