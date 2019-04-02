@@ -4,7 +4,7 @@ import android.content.Context;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import ptv.zohar.mvpdemo.data.net.http.ObserverOnNextListener;
+import module.zohar.prt.net.http.ObserverOnNextListener;
 import ptv.zohar.mvpdemo.entity.Movie;
 import ptv.zohar.mvpdemo.ui.base.mvp.BasePresenter;
 

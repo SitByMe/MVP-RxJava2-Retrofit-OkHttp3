@@ -1,4 +1,4 @@
-package ptv.zohar.mvpdemo.data.net.http;
+package module.zohar.prt.net.http;
 
 import android.util.Log;
 

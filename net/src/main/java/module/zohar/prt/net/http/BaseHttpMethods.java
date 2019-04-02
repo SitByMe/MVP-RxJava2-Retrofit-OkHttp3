@@ -1,4 +1,4 @@
-package ptv.zohar.mvpdemo.data.net.http.httpMethods;
+package module.zohar.prt.net.http;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -8,14 +8,14 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by Zohar on 2018/3/29.
+ * Created by lhZou on 2018/3/29.
  * desc:
  */
-class BaseHttpMethods {
+public class BaseHttpMethods {
     /**
      * 封装线程管理和订阅的过程
      */
-    static <T> void httpSubscribe(Observable<T> observable, Observer<T> observer) {
+    public static <T> void httpSubscribe(Observable<T> observable, Observer<T> observer) {
         observable.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -25,7 +25,7 @@ class BaseHttpMethods {
     /**
      * 封装线程管理和订阅的过程
      */
-    static <T> void httpSubscribe(Observable<T> observable, Consumer<Disposable> before, Observer<T> observer) {
+    public static <T> void httpSubscribe(Observable<T> observable, Consumer<Disposable> before, Observer<T> observer) {
         if (before == null) {
             httpSubscribe(observable, observer);
         } else {

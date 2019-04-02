@@ -1,4 +1,4 @@
-package ptv.zohar.mvpdemo.data.net.http;
+package module.zohar.prt.net.http;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 
 /**
- * Created by Zohar on 2018/3/29.
+ * Created by lhZou on 2018/3/29.
  * desc:
  */
 public class ProgressDialogHandler extends Handler {

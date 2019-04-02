@@ -1,10 +1,10 @@
-package ptv.zohar.mvpdemo.data.net.http;
+package module.zohar.prt.net.http;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by Zohar on 2018/3/29.
+ * Created by lhZou on 2018/3/29.
  * desc:
  */
 public class MyObserver<T> implements Observer<T>, ProgressCancelListener {

@@ -4,14 +4,16 @@ package ptv.zohar.mvpdemo.ui.base.mvp;
  * Created by lhZou on 2018/1/24.
  * desc:
  */
-public abstract class BasePresenter<V extends BaseView, M extends DataManager> {
+public abstract class BasePresenter<V extends BaseView, M extends DataManager> implements IBasePresenter<V> {
     private V mView;
     private M mModel;
 
+    @Override
     public void attachView(V view) {
         this.mView = view;
     }
 
+    @Override
     public void detachView() {
         this.mView = null;
         this.mModel = null;
@@ -21,11 +23,20 @@ public abstract class BasePresenter<V extends BaseView, M extends DataManager> {
         return mView;
     }
 
-    public void setModel(M mModel) {
+    protected void setModel(M mModel) {
         this.mModel = mModel;
     }
 
-    public M getModel() {
+    protected M getModel() {
         return mModel;
+    }
+
+    @Override
+    public boolean hasLogin() {
+        return true;
+    }
+
+    @Override
+    public void logout() {
     }
 }

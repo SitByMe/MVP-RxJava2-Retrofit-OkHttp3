@@ -1,14 +1,15 @@
-package ptv.zohar.mvpdemo.data.net.http.httpMethods;
+package ptv.zohar.mvpdemo.data.net.httpMethods;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import module.zohar.prt.net.http.BaseHttpMethods;
+import ptv.zohar.mvpdemo.data.net.HttpCoreHelper;
 import ptv.zohar.mvpdemo.entity.Movie;
-import ptv.zohar.mvpdemo.data.net.http.HttpCore;
-import ptv.zohar.mvpdemo.data.net.http.iservices.IMovieService;
+import ptv.zohar.mvpdemo.data.net.iservices.IMovieService;
 
 /**
- * Created by Zohar on 2018/3/29.
+ * Created by lhZou on 2018/3/29.
  * desc:
  */
 public class MovieHttpMethods extends BaseHttpMethods {
@@ -21,6 +22,6 @@ public class MovieHttpMethods extends BaseHttpMethods {
      * @param observer Observer with Movie
      */
     public static void getTopMovie(int start, int count, Consumer<Disposable> before, Observer<Movie> observer) {
-        httpSubscribe(HttpCore.getService(IMovieService.class).getTopMovie(start, count), before, observer);
+        httpSubscribe(HttpCoreHelper.getService(IMovieService.class).getTopMovie(start, count), before, observer);
     }
 }
